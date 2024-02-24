@@ -6,22 +6,7 @@ console.log("hello world");
 // function bizga osha arrayning eng katta qiymatiga tegishli birinchi indexni qaytarsin.
 // MASALAN: getHighestIndex([5, 21, 12, 21, 8]) return qiladi 1 sonini.
 
-// function getHighestIndex(arr: number[]): number {
-//   let highestNum: number = Math.max(...arr); // ... - rest operator, yani arr-da olingandan key
-//   let highest = arr[0]; // Bu yerda sifrongoq bo'ladi, lekin bu funksiyaga mashincha beramiz!
-//   let highestIndex = 0;
-//   for (let i = 1; i < arr.length; i++) {
-//     if (arr[i] > highest) {
-//       highest = arr[i];
-//       highestIndex = i;
-//     }
-//   }
-//   return highestIndex;
-// }
-
-// console.log(getHighestIndex([5, 21, 12, 21, 8])); // 1
-// console.log(getHighestIndex([15, 4, 37, 9, 6])); // 3
-// console.log(getHighestIndex([1, 1, 1, 1])); // 0
+//
 
 function getHighestIndex(arr: number[]): number {
   if (arr.length === 0) {
