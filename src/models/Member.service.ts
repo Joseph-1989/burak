@@ -1,6 +1,6 @@
 import { MemberType } from "../libs/enums/member.enum";
 import Errors, { HttpCode, Message } from "../libs/Error";
-import { Member, MemberInput } from "../libs/types/member";
+import { LoginInput, Member, MemberInput } from "../libs/types/member";
 import MemberModel from "../schema/Member.model";
 
 class MemberService {
@@ -30,7 +30,39 @@ class MemberService {
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
     }
   }
+  public async processLogin(input: LoginInput): Promise<Member> {
+    const member = await this.memberModel
+      .findOne(
+        { memberNick: input.memberNick },
+        { memberNick: 1, memberPassword: 1 }
+      )
+      .exec();
+    if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
+    const isMatch = input.memberPassword === member.memberPassword;
+    console.log("isMatch : ", isMatch);
+    console.log("input:", input);
+    console.log("input.memberPassword:", input.memberPassword);
+    console.log("member:", member);
+    console.log("member.memberPassword:", member.memberPassword);
+    if (!isMatch) {
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
+      console.log("Errors: Akmal ", Errors);
+    }
+
+    return await this.memberModel.findById(member._id).exec();
+
+    // const result = await this.memberModel.findById(member._id).exec();
+    // console.log("result: ", result);
+    // console.log(member._id, "=====", result._id);
+    console.log("member._id: ", member._id);
+    console.log("this.memberModel:", this.memberModel);
+    console.log("this.memberModel.schema:", this.memberModel.schema);
+    // console.log("await:", await);
+    // console.log("login member : ", member);
+    // return result;
+  }
 }
+
 export default MemberService;
 
 // static method nima

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
-import { MemberInput } from "../libs/types/member";
+import { LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
 
 const restaurantController: T = {};
@@ -26,19 +26,30 @@ restaurantController.getLogin = (req: Request, res: Response) => {
 restaurantController.getSignup = (req: Request, res: Response) => {
   try {
     console.log("getSignup");
-
+    // console.log("req.body:", req.body);
+    // const input: LoginInput = req.body;
+    // const memberService = new MemberService();
     res.send("Signup Page");
   } catch (err) {
     console.error("Error : Get SignUp", err);
   }
 };
 
-restaurantController.processLogin = (req: Request, res: Response) => {
+restaurantController.processLogin = async (req: Request, res: Response) => {
   try {
     console.log("processLogin");
-    res.send("processLogin Page: DONE");
+    console.log(
+      "ProcessLogin: the body information contains in postman app: ",
+      req.body
+    );
+    const input: LoginInput = req.body;
+    // input.memberType = MemberType.RESTAURANT;
+    const meberService = new MemberService();
+    const result = await meberService.processLogin(input);
+    res.send(result);
   } catch (err) {
     console.error("Error : processLogin ", err);
+    res.send(err);
   }
 };
 
