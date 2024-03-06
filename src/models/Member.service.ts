@@ -47,6 +47,7 @@ class MemberService {
     if (!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
 
     const isMatch = await bcrypt.compare(
+      //bcrypt compare qilyapti,
       input.memberPassword,
       member.memberPassword
     );

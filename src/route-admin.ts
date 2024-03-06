@@ -17,6 +17,6 @@ routerAdmin
   .get("/signup", restaurantController.getSignup)
   .post("/signup", restaurantController.processSignup);
 
-//   PRODUCTS:
+// PRODUCTS:
 // USER:
 export default routerAdmin;
