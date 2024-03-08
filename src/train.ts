@@ -1,16 +1,16 @@
-// I-TASK:
+// J-TASK:
 
-// Shunday function tuzing, unga string argument pass bolsin.
-// Function ushbu agrumentdagi digitlarni yangi stringda return qilsin
-// MASALAN: getDigits("m14i1t") return qiladi "141"
+// Shunday function yozing, u string qabul qilsin va string ichidagi eng uzun sozni qaytarsin.
+// MASALAN: findLongestWord("I come from Uzbekistan") return "Uzbekistan"
 
-function getDigits(str: string): string {
-  let res = "";
-  for (const symbol of str) {
-    if (/^[0-9]+$/.test(symbol)) {
-      res += symbol;
+function findLongestWord(s: string): string {
+  const words = s.split(" ");
+  let longestWord = "";
+  for (let word of words) {
+    if (word.length > longestWord.length) {
+      longestWord = word;
     }
   }
-  return res;
+  return longestWord;
 }
-console.log(getDigits("m14i1t")); // "141"
+console.log(findLongestWord("I come from Uzbekistan")); //  "Uzbekistan"
