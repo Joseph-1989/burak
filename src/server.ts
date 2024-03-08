@@ -33,7 +33,8 @@ mongoose
     // If PORTis undefined, defaults to port 3003.
     app.listen(PORT, () => {
       // Starts listening for incoming HTTP  requests on the specified host and port.
-      console.log(`Server is running successfully on port ${PORT}`);
+      console.info(`Server is running successfully on port ${PORT}`);
+      console.info(`Admin project on htttp://localhost:${PORT}/admin \n`);
     });
   })
   .catch((err) =>

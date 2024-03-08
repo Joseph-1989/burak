@@ -10,7 +10,7 @@ const restaurantController: T = {};
 restaurantController.goHome = (req: Request, res: Response) => {
   try {
     console.log("goHome");
-    res.send("Home Page");
+    res.render("home");
   } catch (err) {
     console.log("Error: Go Home", err);
   }
@@ -19,7 +19,7 @@ restaurantController.goHome = (req: Request, res: Response) => {
 restaurantController.getSignup = (req: Request, res: Response) => {
   try {
     console.log("getSignup");
-    res.send("Signup Page");
+    res.render("signup");
   } catch (err) {
     console.error("Error : Get SignUp", err);
   }
@@ -28,7 +28,7 @@ restaurantController.getSignup = (req: Request, res: Response) => {
 restaurantController.getLogin = (req: Request, res: Response) => {
   try {
     console.log("getLogin");
-    res.send("Login Page");
+    res.render("login");
   } catch (err) {
     console.error("Error : Get Login", err);
   }
@@ -41,6 +41,9 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
     const newMember = req.body; // get the data from client side to server side by using 'body-parser' middleware
     newMember.memberType = MemberType.RESTAURANT; //set the default member type to be "Restaurant"
     const result = await memberService.processSignup(newMember);
+
+    // TODO: SESSIONS ATHENTICATION - save user info into session object and send it back to client side
+
     res.send(result);
   } catch (err) {
     //    catch any error that may occur during the execution of the function
@@ -55,6 +58,7 @@ restaurantController.processLogin = async (req: Request, res: Response) => {
     console.log("ProcessLogin: ", req.body); //  JSON data you sent to server
     const input: LoginInput = req.body; //   get data from client side
     const result = await memberService.processLogin(input); //    call service class function
+    // TODO: SESSIONS ATHENTICATION
     res.send(result); // send back the response to client side
   } catch (err) {
     console.error("Error : processLogin ", err); //  print error message on console

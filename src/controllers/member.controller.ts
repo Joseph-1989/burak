@@ -15,6 +15,8 @@ memberController.signup = async (req: Request, res: Response) => {
     console.log("req.body: ", req.body); //  for test
     const input: MemberInput = req.body, // get the data from client side to server side by using 'body-parser' middleware
       result: Member = await memberService.signup(input);
+    // TODO: TOKENS AUTHENTICATION 생성하여 보내   주기
+
     res.json({ member: result });
   } catch (err) {
     //catch any error that may occur during the execution of the function
@@ -30,6 +32,7 @@ memberController.login = async (req: Request, res: Response) => {
     console.log("BODY:", req.body); //JSON data you sent to server
     const input: LoginInput = req.body, //get data from client side
       result = await memberService.login(input); //call service class function
+    // TODO: TOKENS AUTHENTICATION
     res.json({ member: result }); //send back the response to client side
   } catch (err) {
     console.log("Error : login ", err); //print error message on console
