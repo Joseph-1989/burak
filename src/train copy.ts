@@ -81,7 +81,7 @@ console.log(resultGer); // natijasi: !dlroW olleH
    BIZNING STANDARTLARIMIZ BO`YICHA, FUNCTION, METHOD, VARIABLE LARNI NOMLARINI 
    CAMAL CASE ORQALI NOMLAB BORAMIZ;
    2.2. CLASS LARNI ESA BIZ PASCAL CASE STANDARTI BILAN NOMLAB BORAMIZ
-   2.3. FOLDERLARNI NOMLASHDA KEBAB CASE STANDARTIDAN FOYDALANAMIZ;
+   2.3. FOLDER LAR VA FILE LARNI NOMLASHDA KEBAB CASE STANDARTIDAN FOYDALANAMIZ;
    2.4. CSS NI ICHIDA ESA BIZ SNAKE CASE STANDARTIDAN FOYDALANAMIZ;
   3. ERROR HANDLING:
   */
@@ -102,3 +102,23 @@ console.log(resultGer); // natijasi: !dlroW olleH
 // 1. TRADITIONAL API, ODATDA ODDIYGINA API HAM DEB NOMLANADI,
 // 2. REST API
 // 3. GRAPHQL API
+
+console.log("TASK-H");
+
+// Task H:
+
+// shunday function tuzing, u integerlardan iborat
+// arrayni argument sifatida qabul qilib, faqat positive
+// qiymatlarni olib string holatda return qilsin
+// MASALAN: getPositive([1, -4, 2]) return qiladi "12"
+
+function getPositive(arr: number[]): string {
+  let result = "";
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > 0) {
+      result += arr[i].toString();
+    }
+  }
+  return result;
+}
+console.log(getPositive([1, -4, 2, 21])); // "12"

@@ -28,7 +28,7 @@ mongoose
     //data bu mongoose.connect methodining Promise ning resolve parametrini bildiradi
     // The `data` parameter might not be used in this block, or it might represent some internal
     // information about the connection (though it's not typical to use `data` for this purpose).
-    console.log("MongoDB connected successfully...", data);
+    console.log("MongoDB connected successfully...");
     const PORT = process.env.PORT ?? 3003; // Attempts to retrieve a port number from the PORTenvironment variable.
     // If PORTis undefined, defaults to port 3003.
     app.listen(PORT, () => {

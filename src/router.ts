@@ -3,11 +3,8 @@ import express from "express";
 const router = express.Router();
 import memberController from "./controllers/member.controller";
 
-// router.get("/", (req: Request, res: Response) => {
-//   res.send("Home page");
-// });
-
-// router.get("/", memberController.goHome);
+router.post("/login", memberController.login);
+router.post("/signup", memberController.signup);
 
 // router.get("/login", (req: Request, res: Response) => {
 //   res.send("Login page");
