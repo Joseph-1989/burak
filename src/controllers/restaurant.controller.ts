@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
-import { LoginInput, MemberInput } from "../libs/types/member";
+import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
+import session from "express-session";
 
 const memberService = new MemberService(); //create an instance of service class
 
@@ -34,7 +35,10 @@ restaurantController.getLogin = (req: Request, res: Response) => {
   }
 };
 
-restaurantController.processSignup = async (req: Request, res: Response) => {
+restaurantController.processSignup = async (
+  req: AdminRequest,
+  res: Response
+) => {
   try {
     console.log("processSignup: this is restaurant.controller module!"); //
     console.log("the body information contains in postman app: ", req.body); //  for test
@@ -44,7 +48,10 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
 
     // TODO: SESSIONS ATHENTICATION - save user info into session object and send it back to client side
 
-    res.send(result);
+    req.session.member = result; //save the returned value from service layer into session object
+    req.session.save(function () {
+      res.send(result);
+    }); //send the response data back to client-side
   } catch (err) {
     //    catch any error that may occur during the execution of the function
     console.error("Error : processSignup ", err); //  print out the error message if any error occurs when processing sign up request
@@ -52,14 +59,21 @@ restaurantController.processSignup = async (req: Request, res: Response) => {
   }
 };
 
-restaurantController.processLogin = async (req: Request, res: Response) => {
+restaurantController.processLogin = async (
+  req: AdminRequest,
+  res: Response
+) => {
   try {
     console.log("processLogin");
     console.log("ProcessLogin: ", req.body); //  JSON data you sent to server
     const input: LoginInput = req.body; //   get data from client side
     const result = await memberService.processLogin(input); //    call service class function
     // TODO: SESSIONS ATHENTICATION
-    res.send(result); // send back the response to client side
+
+    req.session.member = result; //save the returned value from service layer into session object
+    req.session.save(function () {
+      res.send(result);
+    }); //send the response data back to client-side
   } catch (err) {
     console.error("Error : processLogin ", err); //  print error message on console
     res.send(err); // send back a response with status code and error message
