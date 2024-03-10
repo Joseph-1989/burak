@@ -44,7 +44,7 @@ export enum Message {
   NETWORK_ERROR = "Network Error",
   NO_DATA_FOUND = "No Data Is Found",
   NO_MEMBER_NICK = "No member with that member nick.",
-  NOT_AUTHENTICATED = "You are not authenticated, please login firts!",
+  NOT_AUTHENTICATED = "You are not authenticated, please login first!",
   NOT_FOUND = "Resource not found.",
   NOT_FOUND_REQUEST = `Resource not found: the server couldn't find the requested resource. It may be doing something wrong.`,
   ONE_RESULT = "One record matched query parameters.",

@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path"; //Used to resolve paths for serving static files
 import router from "./router"; //Our custom Express.js router
-import routerAdmin from "./route-admin"; //Router for admin functions (login, logout)
+import routerAdmin from "./router-admin"; //Router for admin pages
 import morgan from "morgan"; //Logging middleware for Express 4
 import { MORGAN_FORMAT } from "./libs/config"; //Config variable holding the logging format
 import session from "express-session"; //Simple session middleware for node.js

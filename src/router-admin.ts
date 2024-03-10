@@ -1,5 +1,5 @@
 // import express, { Request, Response } from "express";
-import express from "express";
+import express, { Router } from "express";
 const routerAdmin = express.Router();
 import restaurantController from "./controllers/restaurant.controller";
 
@@ -16,7 +16,7 @@ routerAdmin
 routerAdmin
   .get("/signup", restaurantController.getSignup)
   .post("/signup", restaurantController.processSignup);
-
+routerAdmin.get("/logout", restaurantController.logout);
 routerAdmin.get("/check-me", restaurantController.checkAuthSession);
 
 // PRODUCTS:
