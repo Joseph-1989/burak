@@ -43,7 +43,8 @@ export enum Message {
   MULTIPLE_RESULTS = "Multiple records matched query parameters.",
   NETWORK_ERROR = "Network Error",
   NO_DATA_FOUND = "No Data Is Found",
-  NO_MEMBER_NICK = "Please enter your member's nick.",
+  NO_MEMBER_NICK = "No member with that member nick.",
+  NOT_AUTHENTICATED = "You are not authenticated, please login firts!",
   NOT_FOUND = "Resource not found.",
   NOT_FOUND_REQUEST = `Resource not found: the server couldn't find the requested resource. It may be doing something wrong.`,
   ONE_RESULT = "One record matched query parameters.",
@@ -65,7 +66,7 @@ export enum Message {
   USERNAME_TAKEN = "Username already taken. Please try another one.",
   USER_NOT_AUTHORIZED = "User is not authorized to perform this action.",
   WRONG_CREDENTIALS = "Incorrect username or password.",
-  WRONG_PASSWORD = "Password incorrect.",
+  WRONG_PASSWORD = "Wrong password, please try again.",
   ZERO_RESULTS = "No records match query parameters.",
 }
 

@@ -4,6 +4,7 @@ import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
 import session from "express-session";
+import { Message } from "../libs/Error";
 
 const memberService = new MemberService(); //create an instance of service class
 
@@ -76,6 +77,28 @@ restaurantController.processLogin = async (
     }); //send the response data back to client-side
   } catch (err) {
     console.error("Error : processLogin ", err); //  print error message on console
+    res.send(err); // send back a response with status code and error message
+  }
+};
+
+restaurantController.checkAuthSession = async (
+  req: AdminRequest,
+  res: Response
+) => {
+  try {
+    console.log("checkAuthSession");
+    console.log("checkAuthSession: ", req.body); //  JSON data you sent to server
+
+    if (req.session.member)
+      res.send(
+        `<script>alert("Hold on, ${req.session.member.memberNick}")</script>`
+      );
+    else
+      res.send(
+        `<script>alert("Hold on, ${Message.NOT_AUTHENTICATED}")</script>`
+      );
+  } catch (err) {
+    console.error("Error : checkAuthSession ", err); //  print error message on console
     res.send(err); // send back a response with status code and error message
   }
 };

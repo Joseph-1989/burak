@@ -7,9 +7,9 @@ import { MORGAN_FORMAT } from "./libs/config"; //Config variable holding the log
 import session from "express-session"; //Simple session middleware for node.js
 import ConnectMongoDB from "connect-mongodb-session"; //Store sessions in MongoDB using connect-mongodb-session
 
-const MongoStore = ConnectMongoDB(session); //Connect MongoDB session store to Express Session
-const store = new MongoStore({
-  uri: String(process.env.MONGODB_URI), // || "mongodb://localhost/gallery",
+const MongoDBStore = ConnectMongoDB(session); //Connect MongoDB session store to Express Session
+const store = new MongoDBStore({
+  uri: String(process.env.MONGO_URL), // || "mongodb://localhost/gallery",
   collection: "sessions",
 });
 
