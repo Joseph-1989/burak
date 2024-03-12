@@ -1,16 +1,17 @@
-// J-TASK:
+// K-TASK:
 
-// Shunday function yozing, u string qabul qilsin va string ichidagi eng uzun sozni qaytarsin.
-// MASALAN: findLongestWord("I come from Uzbekistan") return "Uzbekistan"
-
-function findLongestWord(s: string): string {
-  const words = s.split(" ");
-  let longestWord = "";
-  for (let word of words) {
-    if (word.length > longestWord.length) {
-      longestWord = word;
+// Shunday function yozing, u string qabul qilsin va string ichidagi unli harflar sonini qaytarsin.
+// MASALAN: countVowels("string") return 1;
+function countVowels(str: string | any[]) {
+  let vowels = "aeiouAEIOU";
+  let result = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (vowels.includes(str[i])) {
+      result++;
     }
   }
-  return longestWord;
+  return result;
 }
-console.log(findLongestWord("I come from Uzbekistan")); //  "Uzbekistan"
+
+console.log(countVowels("Hello World!")); // 3
+console.log(countVowels("The quick brown fox jumps over the lazy dog")); // 11
