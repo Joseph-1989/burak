@@ -6,6 +6,7 @@ import morgan from "morgan"; //Logging middleware for Express 4
 import { MORGAN_FORMAT } from "./libs/config"; //Config variable holding the logging format
 import session from "express-session"; //Simple session middleware for node.js
 import ConnectMongoDB from "connect-mongodb-session"; //Store sessions in MongoDB using connect-mongodb-session
+import { T } from "./libs/types/common";
 
 const MongoDBStore = ConnectMongoDB(session); //Connect MongoDB session store to Express Session
 const store = new MongoDBStore({
@@ -36,6 +37,12 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+app.use(function (req, res, next) {
+  const sessionInstance = req.session as T;
+  res.locals.member = sessionInstance.member;
+  next();
+});
 
 // #3-VIEWS
 app.set("views", path.join(__dirname, "views")); // set views folder

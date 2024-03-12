@@ -18,9 +18,21 @@ routerAdmin.get("/logout", restaurantController.logout);
 routerAdmin.get("/check-me", restaurantController.checkAuthSession);
 
 // PRODUCTS:
-routerAdmin.get("/product/all", productController.getAllProducts);
-routerAdmin.post("/product/:id", productController.updateChosenProduct);
-routerAdmin.post("/product/create", productController.createNewProduct);
+routerAdmin.get(
+  "/product/all",
+  restaurantController.verifyRestaurant,
+  productController.getAllProducts
+);
+routerAdmin.post(
+  "/product/:id",
+  restaurantController.verifyRestaurant,
+  productController.updateChosenProduct
+);
+routerAdmin.post(
+  "/product/create",
+  restaurantController.verifyRestaurant,
+  productController.createNewProduct
+);
 
 // USER:
 

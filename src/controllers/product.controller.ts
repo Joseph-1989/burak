@@ -9,7 +9,7 @@ const productController: T = {};
 
 productController.getAllProducts = async (req: Request, res: Response) => {
   try {
-    console.log("getAllProducts"); //    eslint-disable-line no-console
+    console.log("getAllProducts"); //eslint-disable-line no-console
     res.render("products");
     // TODO: TOKENS AUTHENTICATION 생성하여 보내   주기
   } catch (err) {
