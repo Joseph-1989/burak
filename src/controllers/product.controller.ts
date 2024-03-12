@@ -23,6 +23,7 @@ productController.getAllProducts = async (req: Request, res: Response) => {
 productController.createNewProduct = async (req: Request, res: Response) => {
   try {
     console.log("createNewProduct"); //
+    res.send("Create new product success!");
     // TODO: TOKENS AUTHENTICATION 생성하여 보내   주기
   } catch (err) {
     //catch any error that may occur during the execution of the function
@@ -35,6 +36,7 @@ productController.createNewProduct = async (req: Request, res: Response) => {
 productController.updateChosenProduct = async (req: Request, res: Response) => {
   try {
     console.log("updateChosenProduct"); //
+    res.send("Update chosen product success!");
     // TODO: TOKENS AUTHENTICATION 생성하여 보내   주기
   } catch (err) {
     //catch any error that may occur during the execution of the function
