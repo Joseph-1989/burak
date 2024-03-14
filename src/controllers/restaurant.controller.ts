@@ -4,7 +4,7 @@ import MemberService from "../models/Member.service";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
 import session from "express-session";
-import Errors, { Message } from "../libs/Error";
+import Errors, { HttpCode, Message } from "../libs/Error";
 
 const memberService = new MemberService(); //create an instance of member model service class
 
@@ -44,21 +44,41 @@ restaurantController.processSignup = async (
   res: Response
 ) => {
   try {
-    console.log("processSignup: this is restaurant.controller module!"); //
-    console.log("the body information contains in postman app: ", req.body); //  for test
-    const newMember = req.body; // get the data from client side to server side by using 'body-parser' middleware
+    console.log("processSignup!\n"); //
+
+    const file = req.file; //express-fileupload middleware
+
+    if (!file)
+      throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
+
+    console.log("\n REQ.BODY: \n", req.body); //  for test
+
+    const newMember: MemberInput = req.body; // get the data from client side to server side by using 'body-parser' middleware
+
+    console.log("\n newMember: \n ", newMember);
+
+    newMember.memberImage = file?.path;
+    console.log("\n file \n", file);
+    console.log("\n newMember.memberImage:\n", newMember.memberImage);
+
     newMember.memberType = MemberType.RESTAURANT; //set the default member type to be "Restaurant"
+    console.log("\n MemberType.RESTAURANT: \n ", MemberType.RESTAURANT);
+    console.log("\n newMember.memberType : \n", newMember.memberType);
     const result = await memberService.processSignup(newMember);
+
+    console.log("\n Result of processSignup: \n", result);
 
     // TODO: SESSIONS ATHENTICATION - save user info into session object and send it back to client side
 
     req.session.member = result; //save the returned value from service layer into session object
+    console.log("\n req.session.member: \n", req.session.member);
     req.session.save(function () {
-      res.send(result);
+      console.log("\n Session saved!", req.session);
+      res.redirect("/admin/product/all");
     }); //send the response data back to client-side
   } catch (err) {
     //    catch any error that may occur during the execution of the function
-    console.error("Error : processSignup ", err); //  print out the error message if any error occurs when processing sign up request
+    console.error("\n Error : processSignup \n", err); //  print out the error message if any error occurs when processing sign up request
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG; //get customized error message or a general one
     res.send(
@@ -80,7 +100,7 @@ restaurantController.processLogin = async (
 
     req.session.member = result; //save the returned value from service layer into session object
     req.session.save(function () {
-      res.send(result); // return the login result back to client side
+      res.redirect("/admin/product/all");
     }); //send the response data back to client-side
   } catch (err) {
     console.error("Error : processLogin ", err); //  print error message on console
