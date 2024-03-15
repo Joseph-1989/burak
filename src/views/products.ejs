@@ -52,6 +52,9 @@
   </div>
   <div>Product page</div>
   <div><%=member.memberNick%></div>
+  <% products.map(function (value, key) { %>
+  <p><%= value.productName %> - <%= value.productSize %></p>
+  <% }) %>
 </body>
 <%- include ('includes/footer') -%>
 <!-- this statement is very case sensetive, so be carefull with the sytax of it -->

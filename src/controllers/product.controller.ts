@@ -16,7 +16,9 @@ const productController: T = {};
 productController.getAllProducts = async (req: Request, res: Response) => {
   try {
     console.log("getAllProducts"); //eslint-disable-line no-console
-    res.render("products");
+    const data = await productService.getAllProducts();
+    console.log("data", data); // eslint-disable-next-line no-console
+    res.render("products", { products: data });
     // TODO: TOKENS AUTHENTICATION 생성하여 보내   주기
   } catch (err) {
     //catch any error that may occur during the execution of the function
