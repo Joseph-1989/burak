@@ -49,7 +49,7 @@ productController.createNewProduct = async (
     console.log(" data :>> \n", data);
     await productService.createNewProduct(data);
     res.send(
-      `<script>alert("Successful creation!"); window.location.replace("admin/product/all");</script>`
+      `<script>alert("Successful  creation!"); window.location.replace("admin/product/all");</script>`
     );
 
     // TODO: TOKENS AUTHENTICATION 생성하여 보내 주기
@@ -67,7 +67,14 @@ productController.createNewProduct = async (
 productController.updateChosenProduct = async (req: Request, res: Response) => {
   try {
     console.log("updateChosenProduct"); //
-    res.send("Update chosen product success!");
+    const id = req.params.id;
+    console.log("req.params: ", req.params);
+    console.log("id :>> ", id);
+
+    const result = await productService.updateChosenProduct(id, req.body);
+
+    // res.send(result);
+    res.status(HttpCode.OK).json({ data: result });
     // TODO: TOKENS AUTHENTICATION 생성하여 보내   주기
   } catch (err) {
     //catch any error that may occur during the execution of the function
