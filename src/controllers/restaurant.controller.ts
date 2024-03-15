@@ -45,39 +45,37 @@ restaurantController.processSignup = async (
 ) => {
   try {
     console.log("processSignup!\n"); //
-
     const file = req.file; //express-fileupload middleware
+    console.log("File : ", file);
 
     if (!file)
       throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
 
-    console.log("\n REQ.BODY: \n", req.body); //  for test
-
     const newMember: MemberInput = req.body; // get the data from client side to server side by using 'body-parser' middleware
-
-    console.log("\n newMember: \n ", newMember);
-
     newMember.memberImage = file?.path;
-    console.log("\n file \n", file);
-    console.log("\n newMember.memberImage:\n", newMember.memberImage);
-
     newMember.memberType = MemberType.RESTAURANT; //set the default member type to be "Restaurant"
-    console.log("\n MemberType.RESTAURANT: \n ", MemberType.RESTAURANT);
-    console.log("\n newMember.memberType : \n", newMember.memberType);
     const result = await memberService.processSignup(newMember);
 
-    console.log("\n Result of processSignup: \n", result);
-
+    // console.log("\n REQ.BODY: \n", req.body); //  for test
+    // console.log("\n newMember: \n ", newMember);
+    // console.log("\n file \n", file);
+    // console.log("\n newMember.memberImage:\n", newMember.memberImage);
+    // console.log("\n MemberType.RESTAURANT: \n ", MemberType.RESTAURANT);
+    // console.log("\n newMember.memberType : \n", newMember.memberType);
+    // console.log("\n Result of processSignup: \n", result);
     // TODO: SESSIONS ATHENTICATION - save user info into session object and send it back to client side
 
     req.session.member = result; //save the returned value from service layer into session object
-    console.log("\n req.session.member: \n", req.session.member);
     req.session.save(function () {
-      console.log("\n Session saved!", req.session);
+      // res.send(result);
+
       res.redirect("/admin/product/all");
-    }); //send the response data back to client-side
+
+      // console.log("\n req.session.member: \n", req.session.member);
+      // console.log("\n Session saved!", req.session);
+    });
   } catch (err) {
-    //    catch any error that may occur during the execution of the function
+    //catch any error that may occur during the execution of the function
     console.error("\n Error : processSignup \n", err); //  print out the error message if any error occurs when processing sign up request
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG; //get customized error message or a general one
