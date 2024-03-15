@@ -52,7 +52,7 @@ restaurantController.processSignup = async (
       throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
 
     const newMember: MemberInput = req.body; // get the data from client side to server side by using 'body-parser' middleware
-    newMember.memberImage = file?.path;
+    newMember.memberImage = file?.path.replace(/\\/g, "/");
     newMember.memberType = MemberType.RESTAURANT; //set the default member type to be "Restaurant"
     const result = await memberService.processSignup(newMember);
 

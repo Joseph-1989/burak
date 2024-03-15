@@ -35,6 +35,7 @@ productController.createNewProduct = async (
     console.log("\n req.files:\n", req.files);
     // res.send("\nCreate new product success!\n");
     if (!req.files?.length)
+      // bu yerda files ning lengthi kamida o dan katta bo`lishi kk, ya`ni kamida bitta file yuklagan bo`lishi kk, agar length 0 ga teng bo`lsa unda error beradi
       throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED);
     const data: ProductInput = req.body;
     data.productImages = req.files?.map((ele) => {
@@ -45,10 +46,10 @@ productController.createNewProduct = async (
       console.log(`\n ele.path : ${ele.path} \n`);
       return ele.path.replace(/\\/g, "/");
     });
-
+    console.log(" data :>> \n", data);
     await productService.createNewProduct(data);
     res.send(
-      `<script>alert("Successfull creation!"); window.location.replace("admin/product/all");</script>`
+      `<script>alert("Successful creation!"); window.location.replace("admin/product/all");</script>`
     );
 
     // TODO: TOKENS AUTHENTICATION 생성하여 보내 주기
@@ -58,7 +59,7 @@ productController.createNewProduct = async (
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(
-      `<script>alert("${message}"); window.location.replace("admin/product/all");</script>`
+      `<script>alert("${message}"); window.location.replace("admin/product/all")</script>`
     );
   }
 };

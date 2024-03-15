@@ -4,7 +4,6 @@ import {
   ProductCollection,
   ProductSize,
   ProductStatus,
-  ProductVolume,
 } from "../enums/product.enum";
 
 export interface Product {
@@ -15,7 +14,7 @@ export interface Product {
   productPrice: Number;
   productLeftCount: Number;
   productSize: ProductSize;
-  productVolume: ProductVolume;
+  productVolume: number;
   productDesc?: String;
   productrImages: string[];
   productViews: Number;
