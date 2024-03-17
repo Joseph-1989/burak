@@ -1,6 +1,12 @@
+import { shapeIntoMongooseObjectID } from "../libs/config";
 import { MemberType } from "../libs/enums/member.enum";
 import Errors, { HttpCode, Message } from "../libs/Error";
-import { LoginInput, Member, MemberInput } from "../libs/types/member";
+import {
+  LoginInput,
+  Member,
+  MemberInput,
+  MemberUpdateInput,
+} from "../libs/types/member";
 import MemberModel from "../schema/Member.model";
 import * as bcrypt from "bcryptjs";
 
@@ -142,6 +148,17 @@ class MemberService {
       .exec();
     console.log("MemberModel: result:", result);
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND); //  Only one restaurant can be created in the system
+
+    return result;
+  }
+
+  public async updateChosenUser(input: MemberUpdateInput): Promise<Member> {
+    input._id = shapeIntoMongooseObjectID(input._id);
+    const result = await this.memberModel
+      .findByIdAndUpdate({ _id: input._id }, input, { new: true })
+      .exec();
+    console.log("MemberModel: result:", result);
+    if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED); //  Only one restaurant can be created in the system
 
     return result;
   }
