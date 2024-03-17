@@ -133,6 +133,18 @@ class MemberService {
 
     return await this.memberModel.findById(member._id).exec();
   }
+
+  public async getUsers(): Promise<Member[]> {
+    const result = await this.memberModel
+      .find({
+        memberType: MemberType.USER,
+      })
+      .exec();
+    console.log("MemberModel: result:", result);
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND); //  Only one restaurant can be created in the system
+
+    return result;
+  }
 }
 
 export default MemberService;

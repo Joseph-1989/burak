@@ -56,23 +56,9 @@ restaurantController.processSignup = async (
     newMember.memberType = MemberType.RESTAURANT; //set the default member type to be "Restaurant"
     const result = await memberService.processSignup(newMember);
 
-    // console.log("\n REQ.BODY: \n", req.body); //  for test
-    // console.log("\n newMember: \n ", newMember);
-    // console.log("\n file \n", file);
-    // console.log("\n newMember.memberImage:\n", newMember.memberImage);
-    // console.log("\n MemberType.RESTAURANT: \n ", MemberType.RESTAURANT);
-    // console.log("\n newMember.memberType : \n", newMember.memberType);
-    // console.log("\n Result of processSignup: \n", result);
-    // TODO: SESSIONS ATHENTICATION - save user info into session object and send it back to client side
-
     req.session.member = result; //save the returned value from service layer into session object
     req.session.save(function () {
-      // res.send(result);
-
       res.redirect("/admin/product/all");
-
-      // console.log("\n req.session.member: \n", req.session.member);
-      // console.log("\n Session saved!", req.session);
     });
   } catch (err) {
     //catch any error that may occur during the execution of the function
@@ -121,6 +107,27 @@ restaurantController.logout = async (req: AdminRequest, res: Response) => {
   } catch (err) {
     console.error("Error : logout ", err); //  print error message on console
     res.send(err); // send back a response with status code and error message
+  }
+};
+
+restaurantController.getUsers = async (req: Request, res: Response) => {
+  try {
+    console.log("getUsers");
+    const result = await memberService.getUsers();
+    console.log("Controller: result: ", result); //print the result in console
+
+    res.render("users", { users: result });
+  } catch (err) {
+    console.error("Error : getUsers ", err); //  print error message on console
+    res.redirect("/admin/login"); // redirect to admin page if any errors occur
+  }
+};
+
+restaurantController.updateChosenUser = (req: Request, res: Response) => {
+  try {
+    console.log("updateChosenUser");
+  } catch (err) {
+    console.error("Error : updateChosenUser ", err); //  print error message on console
   }
 };
 
