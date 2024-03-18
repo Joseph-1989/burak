@@ -45,6 +45,7 @@ restaurantController.processSignup = async (
 ) => {
   try {
     console.log("processSignup!\n"); //
+    console.log(req.body);
     const file = req.file; //express-fileupload middleware
     console.log("File : ", file);
 
