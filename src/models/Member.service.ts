@@ -69,19 +69,15 @@ class MemberService {
     // buning vasifasi, undan oldingi methodga qo`shimcha holatda boshqa methodlar qo`shilib kelmasligini bildiradi.
     if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED); //  Only one restaurant can be created in the system
 
-    // console.log("before:", input.memberPassword);
-
     const salt = await bcrypt.genSalt();
     console.log("salt: ", salt);
     input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
-    // console.log("after:", input.memberPassword);
+
     console.log("input", input);
     try {
       const result = await this.memberModel.create(input); //  회원가입시 비번을 hash화하여 DB에 저장한다.
       console.log("input", input);
-      // const tempResult = new this.memberModel(input);
-      // const result = await tempResult.save();
-      // console.log("This info is located in Member.service module!");
+
       result.memberPassword = ""; // 클라이언트로 보내기전에는    비밀번호를 제거해주자!
       console.log("result.memberPassword: ", result.memberPassword);
       return result;

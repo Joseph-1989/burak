@@ -66,7 +66,7 @@ restaurantController.processSignup = async (
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG; //get customized error message or a general one
     res.send(
-      `<script>alert("${message}"); window.location.replace("admin/signup");</script>`
+      `<script>alert("${message}"); window.location.replace("/admin/signup");</script>`
     );
   }
 };
@@ -78,10 +78,11 @@ restaurantController.processLogin = async (
   try {
     console.log("processLogin");
     console.log("ProcessLogin: ", req.body); //  JSON data you sent to server
+
     const input: LoginInput = req.body; //   get data from client side
     const result = await memberService.processLogin(input); //    call service class function
-    // TODO: SESSIONS ATHENTICATION
 
+    // TODO: SESSIONS ATHENTICATION
     req.session.member = result; //save the returned value from service layer into session object
     req.session.save(function () {
       res.redirect("/admin/product/all");
@@ -91,7 +92,7 @@ restaurantController.processLogin = async (
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG; //get customized error message or a general one
     res.send(
-      `<script>alert("${message}"); window.location.replace("admin/login");</script>`
+      `<script>alert("${message}"); window.location.replace("/admin/login");</script>`
     ); // return
   }
 };
@@ -166,7 +167,7 @@ restaurantController.verifyRestaurant = (
   } else {
     const message = Message.NOT_AUTHENTICATED;
     res.send(
-      `<script>alert(" ${message}"); window.location.replace("admin/login");</script>`
+      `<script>alert(" ${message}"); window.location.replace("/admin/login");</script>`
     ); // send back a response with status code and error message
   }
 };
