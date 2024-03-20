@@ -1,14 +1,14 @@
 console.log("Signup frontend javascript file");
 
 $(function () {
-  const fileTarget = $(".file-box .upload-hidden  ");
+  const fileTarget = $(".file-box .upload-hidden");
   let filename;
 
   fileTarget.on("change", function () {
     if (window.FileReader) {
       const uploadFile = $(this)[0].files[0]; // get the file
-      console.log("uploadFile     : ", uploadFile);
-      const fileType = uploadFile.type["type"]; // image, video etc
+      console.log("uploadFile:", uploadFile);
+      const fileType = uploadFile["type"]; // image, video etc
       const validImageType = ["image/jpeg", "image/jpg", "image/png"];
       if (!validImageType.includes(fileType)) {
         alert(

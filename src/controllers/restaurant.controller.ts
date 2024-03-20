@@ -78,7 +78,7 @@ restaurantController.processLogin = async (
 ) => {
   try {
     console.log("processLogin");
-    console.log("ProcessLogin: ", req.body); //  JSON data you sent to server
+    console.log("req.body: ", req.body); //  JSON data you sent to server
 
     const input: LoginInput = req.body; //   get data from client side
     const result = await memberService.processLogin(input); //    call service class function

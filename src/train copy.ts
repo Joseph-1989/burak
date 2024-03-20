@@ -233,6 +233,12 @@ function palindromCheck(str: string): boolean {
 console.log(palindromCheck("dad")); // Output: true
 console.log(palindromCheck("son")); // Output: false
 
+// O-TASK:
+
+// Shunday function yozing, u har xil valuelardan iborat array qabul qilsin
+// va array ichidagi sonlar yigindisini hisoblab chiqqan javobni qaytarsin.
+// MASALAN: calculateSumOfNumbers([10, "10", {son: 10}, true, 35]) return 45    ;
+
 // function calculateSumOfNumbers(arr: Array<any>): number {
 //   let sum = 0;
 //   for (const elem of arr) {
