@@ -119,6 +119,7 @@ restaurantController.getUsers = async (req: Request, res: Response) => {
     console.log("Controller: result: ", result); //print the result in console
 
     res.render("users", { users: result });
+    console.log(`res.render("users", { users: result });: `);
   } catch (err) {
     console.error("Error : getUsers ", err); //  print error message on console
     res.redirect("/admin/login"); // redirect to admin page if any errors occur
