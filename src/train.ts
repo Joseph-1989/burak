@@ -34,37 +34,19 @@ Backend validation
 Database validation
 */
 
-// O-TASK:
+// P-TASK:
 
-// Shunday function yozing, u har xil valuelardan iborat array qabul qilsin
-// va array ichidagi sonlar yigindisini hisoblab chiqqan javobni qaytarsin.
-// MASALAN: calculateSumOfNumbers([10, "10", {son: 10}, true, 35]) return 45    ;
+// Shunday function yozing, u object qabul qilsin va arrayni object arrayga otkazib arrayni qaytarsin qaytarsin.
+// MASALAN: objectToArray( {a: 10, b: 20}) return [['a', 10], ['b', 20]]
 
-function calculateSumOfNumbers(arr: Array<any>): number {
-  //Filter out non-numeric values and convert the rest to numbers
-  const numbers = arr
-    .filter((val) => typeof val === "number")
-    .map((val) => Number(val));
-
-  //Calculate the sum of the numbers
-  const sum = numbers.reduce((acc, curr) => acc + curr, 0);
-
-  //Return the sum
-  return sum;
+function objectToArray(obj: { [key: string]: any }) {
+  let arr = [];
+  for (let key in obj) {
+    console.log(`Key is ${key}, Value is ${obj[key]}`);
+    arr.push([key, obj[key]]);
+  }
+  // Return the array of pairs
+  return arr;
 }
 
-//Example usage:
-console.log(
-  calculateSumOfNumbers([
-    10,
-    "10",
-    { son: 10 },
-    true,
-    35,
-    false,
-    { raqam: 20 },
-    100,
-    null,
-    1,
-  ])
-);
+console.log(objectToArray({ name: "John", age: 30 }));
