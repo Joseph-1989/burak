@@ -16,7 +16,7 @@ export enum HttpCode {
   FORBIDDEN = 403, // Server understood the request, but it refuses to authorize it.
   NOT_FOUND = 404, // The requested resource could not be found.
   METHOD_NOT_ALLOWED = 405, // The method specified in the Request-Line is not allowed for the target resource.
-  TIMOUT_ERROR = 408, // Used when the server does not receive a request from the client within the time that it expects the request to
+  TIMEOUT_ERROR = 408, // Used when the server does not receive a request from the client within the time that it expects the request to
   CONFLICT = 409, // The request conflict with current data.
   GONE = 410, // The requested resource is no longer available at    the server and there is no forwarding address.
   PRECONDITION_FAILED = 412, // The request failed because it did not meet one of the preconditions that is associated with
@@ -27,6 +27,15 @@ export enum HttpCode {
 export enum Message {
   ADMIN_RIGHTS_REQUIRED = "You don't have the rights to do that.",
   AUTH_REQUIRED = "Authorization required",
+  BLOCKED_USER = "The user is blocked, contact restaurant",
+  CANNOT_DELETE_OWN_ACCOUNT = "You cannot delete your  own account.",
+  COMMENT_DOES_NOT_EXIST = "The comment you are trying to interact with doesn't exist.",
+  EMAIL_TAKEN = "That email address is already taken. Please choose another.",
+  FIELD_CANT_BE_BLANK = "{field} can't be blank.",
+  IMAGE_UPLOAD_FAILED = "Image upload failed.",
+  INVALID_PASSWORD = "Invalid password. Password must contain at least 8 characters including one uppercase letter, one lowercase letter",
+  INVALID_AUTHENTICATION = "Invalid authorization token provided.",
+
   CATEGORY_DOES_NOT_EXIST = "Category does not exist.",
   COMMENT_NOT_FOUND = "Comment not found.",
   CONFLICT = `Conflict: the current state conflicts with the desired state`,
@@ -58,7 +67,7 @@ export enum Message {
   SERVER_ERROR = "Internal server error.",
   SOMETHING_WENT_WRONG = "Something went wrong",
   SUCCESSFULLY_CREATED = "Successfully created new item.",
-  TIMOUT_ERROR = "Timeout Error",
+  TIMEOUT_ERROR = "Timeout Error",
   TOO_MANY_ATTEMPTS_TRY_LATER = "Too many failed attempts. Try again later.",
   UNAUTHORIZED = `Unauthorized: please login first`,
   UPDATE_FAILED = "Update is failed.",
