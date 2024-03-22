@@ -34,6 +34,7 @@ productController.createNewProduct = async (
 ) => {
   try {
     console.log("createNewProduct \n");
+    console.log("req.body:", req.body);
     console.log("\n req.files:\n", req.files);
     // res.send("\nCreate new product success!\n");
     if (!req.files?.length)
@@ -51,7 +52,7 @@ productController.createNewProduct = async (
     console.log(" data :>> \n", data);
     await productService.createNewProduct(data);
     res.send(
-      `<script>alert("Successful  creation!"); window.location.replace("admin/product/all");</script>`
+      `<script>alert("Successful  creation!"); window.location.replace("/admin/product/all");</script>`
     );
 
     // TODO: TOKENS AUTHENTICATION 생성하여 보내 주기
@@ -61,7 +62,7 @@ productController.createNewProduct = async (
     const message =
       err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
     res.send(
-      `<script>alert("${message}"); window.location.replace("admin/product/all")</script>`
+      `<script>alert("${message}"); window.location.replace("/admin/product/all")</script>`
     );
   }
 };
