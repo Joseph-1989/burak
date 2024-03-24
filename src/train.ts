@@ -1,9 +1,9 @@
 /* Project Standards:
 - Logging standards
 - Naming standards:
-                   function, method, variable = CAMEL
-                   class => PASCAL
-                   folder, file => KEBAB CSS => SNAKE
+function, method, variable = CAMEL
+class => PASCAL
+folder, file => KEBAB CSS => SNAKE
 - Error handling
 */
 
@@ -34,19 +34,20 @@ Backend validation
 Database validation
 */
 
-// P-TASK:
+// Q-TASK:
 
-// Shunday function yozing, u object qabul qilsin va arrayni object arrayga otkazib arrayni qaytarsin qaytarsin.
-// MASALAN: objectToArray( {a: 10, b: 20}) return [['a', 10], ['b', 20]]
+// Shunday function yozing, u 2 ta parametrgga ega bolib birinchisi object, ikkinchisi string. Agar string parametr objectni propertysi bolsa true bolmasa false qaytarsin.
+// MASALAN: hasProperty({name: "BMW", model: "M3"}, "model") return true; hasProperty({name: "BMW", model: "M3"}, "year") return false
 
-function objectToArray(obj: { [key: string]: any }) {
-  let arr = [];
-  for (let key in obj) {
-    console.log(`Key is ${key}, Value is ${obj[key]}`);
-    arr.push([key, obj[key]]);
-  }
-  // Return the array of pairs
-  return arr;
+function hasProperty(obj: { [key: string]: any }, prop: string): boolean {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-console.log(objectToArray({ name: "John", age: 30 }));
+console.log(hasProperty({ name: "BMW", model: "M3" }, "model")); // Output: true
+
+class Car {
+  constructor(public brand: string, public model: string) {}
+}
+
+const myCar = new Car("Audi", "A8");
+console.log(hasProperty(myCar, "brand")); // Output: true
