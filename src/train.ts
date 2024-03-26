@@ -34,20 +34,23 @@ Backend validation
 Database validation
 */
 
-// Q-TASK:
+// R-TASK:
 
-// Shunday function yozing, u 2 ta parametrgga ega bolib birinchisi object, ikkinchisi string. Agar string parametr objectni propertysi bolsa true bolmasa false qaytarsin.
-// MASALAN: hasProperty({name: "BMW", model: "M3"}, "model") return true; hasProperty({name: "BMW", model: "M3"}, "year") return false
+// Shunday function yozing, u string parametrga ega bolsin.
+// String "1+2" holatda pass qilinganda string ichidagi sonlar
+//  yigindisini number holatda qaytarsin.
+// MASALAN: calculate("1+3") return 4;
 
-function hasProperty(obj: { [key: string]: any }, prop: string): boolean {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
+function calculate(str: string): number {
+  return eval(str);
 }
 
-console.log(hasProperty({ name: "BMW", model: "M3" }, "model")); // Output: true
-
-class Car {
-  constructor(public brand: string, public model: string) {}
-}
-
-const myCar = new Car("Audi", "A8");
-console.log(hasProperty(myCar, "brand")); // Output: true
+console.log(calculate("1+2")); //returns 3
+console.log(calculate("10-3")); //returns 7
+console.log(calculate("2*4")); //returns 8
+console.log(calculate("5/2")); //returns 2.5
+console.log(calculate("1 + 2 * 3")); //returns 7
+console.log(calculate("(3 + 4) * 2")); //returns 14
+console.log(calculate("2 ** 3")); //returns 8
+console.log(calculate("12 % 5")); //returns 2
+console.log(calculate("2 + 2 * (2 + 1)")); //returns 6
